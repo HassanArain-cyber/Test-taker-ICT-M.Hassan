@@ -1,891 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Intro to Computers Quiz — Muhammad Hassan</title>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0a0a14; }
-    button { outline: none; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0a0a14; }
-    ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 3px; }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState } = React;
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0a0f"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="ReelsVault"/>
+<title>ReelsVault</title>
 
-
-const ALL_QUESTIONS = [
-  // ════════════════════════════════════════
-  // CHAPTER 1A – Introducing Computer Systems
-  // ════════════════════════════════════════
-
-  // --- The Computer Defined ---
-  { id: 1,  ch: "1A", topic: "The Computer Defined",
-    q: "A computer is best described as a:",
-    opts: ["Mechanical calculating device","Programmable electronic device that converts data into information","Analog signal processor","Device that only stores information"],
-    a: 1 },
-  { id: 2,  ch: "1A", topic: "The Computer Defined",
-    q: "Modern computers are called 'digital' because they:",
-    opts: ["Use a range of continuous voltage values","Combine only two digits to represent all data","Process color images","Run on solar power"],
-    a: 1 },
-  { id: 3,  ch: "1A", topic: "The Computer Defined",
-    q: "Older (analog) computers represented data using:",
-    opts: ["Binary digits only","A range of values","Optical pulses","Magnetic fields exclusively"],
-    a: 1 },
-  { id: 4,  ch: "1A", topic: "The Computer Defined",
-    q: "What does a computer ultimately convert data into?",
-    opts: ["Signals","Files","Information","Code"],
-    a: 2 },
-
-  // --- Classification of Computers ---
-  { id: 5,  ch: "1A", topic: "Classification of Computers",
-    q: "Desktop computers are also known as:",
-    opts: ["Workstations","PC or Microcomputers","Minicomputers","Mainframes"],
-    a: 1 },
-  { id: 6,  ch: "1A", topic: "Classification of Computers",
-    q: "A workstation differs from a desktop because it is:",
-    opts: ["Cheaper and slower","Specialized, optimized for science or graphics, and more powerful","Portable and lightweight","Used only for gaming"],
-    a: 1 },
-  { id: 7,  ch: "1A", topic: "Classification of Computers",
-    q: "A notebook computer is approximately what size?",
-    opts: ["4 × 6 inches","8½ × 11 inches","12 × 15 inches","6 × 9 inches"],
-    a: 1 },
-  { id: 8,  ch: "1A", topic: "Classification of Computers",
-    q: "A notebook computer weighs between:",
-    opts: ["1–2 lbs","3–8 lbs","10–15 lbs","20–25 lbs"],
-    a: 1 },
-  { id: 9,  ch: "1A", topic: "Classification of Computers",
-    q: "A docking station allows a portable computer to:",
-    opts: ["Connect to satellite internet","Function like a desktop with external power, monitor, and data transfer","Run server OS","Increase its processor speed"],
-    a: 1 },
-  { id: 10, ch: "1A", topic: "Classification of Computers",
-    q: "Tablet computers accept input primarily through:",
-    opts: ["A standard keyboard","A pen or touch screen","Voice commands only","A joystick"],
-    a: 1 },
-  { id: 11, ch: "1A", topic: "Classification of Computers",
-    q: "Personal Digital Assistants (PDAs) are mainly used for:",
-    opts: ["Running complex engineering software","Note-taking or contact management","Hosting web servers","Video editing"],
-    a: 1 },
-  { id: 12, ch: "1A", topic: "Classification of Computers",
-    q: "Data on a PDA can be synchronized with a:",
-    opts: ["Mainframe","Desktop computer","Supercomputer","Network server"],
-    a: 1 },
-  { id: 13, ch: "1A", topic: "Classification of Computers",
-    q: "A smart phone is a hybrid of:",
-    opts: ["A laptop and a tablet","A cell phone and a PDA","A desktop and a workstation","A server and a mainframe"],
-    a: 1 },
-  { id: 14, ch: "1A", topic: "Classification of Computers",
-    q: "Which of the following is the NEWEST development in portable computers?",
-    opts: ["Notebook computer","PDA","Tablet computer","Workstation"],
-    a: 2 },
-
-  // --- Computers for Organizations ---
-  { id: 15, ch: "1A", topic: "Computers for Organizations",
-    q: "A network server is often described as:",
-    opts: ["The most powerful computer ever made","A centralized computer that provides access to network resources","A portable device for field workers","A terminal used in hospitals"],
-    a: 1 },
-  { id: 16, ch: "1A", topic: "Computers for Organizations",
-    q: "Multiple servers grouped together are called:",
-    opts: ["Minicomputers","Mainframes","Server farms","Supercomputer clusters"],
-    a: 2 },
-  { id: 17, ch: "1A", topic: "Computers for Organizations",
-    q: "Mainframe computers are designed for:",
-    opts: ["Small home offices","Large organizations to handle thousands of users","Research labs for genome projects","Gaming arcades"],
-    a: 1 },
-  { id: 18, ch: "1A", topic: "Computers for Organizations",
-    q: "Users connect to a mainframe through a:",
-    opts: ["Docking station","Terminal (dumb or intelligent)","Smart phone","Wi-Fi router"],
-    a: 1 },
-  { id: 19, ch: "1A", topic: "Computers for Organizations",
-    q: "A minicomputer can handle approximately how many users?",
-    opts: ["Thousands","Hundreds","Tens","Millions"],
-    a: 1 },
-  { id: 20, ch: "1A", topic: "Computers for Organizations",
-    q: "Minicomputers were released in which decade?",
-    opts: ["1950s","1960s","1970s","1980s"],
-    a: 1 },
-  { id: 21, ch: "1A", topic: "Computers for Organizations",
-    q: "Minicomputers are also called:",
-    opts: ["Midrange computers","Macro computers","Superservers","Desktop servers"],
-    a: 0 },
-  { id: 22, ch: "1A", topic: "Computers for Organizations",
-    q: "A minicomputer's processing power is between a:",
-    opts: ["PDA and a laptop","Mainframe and a desktop","Supercomputer and a mainframe","Tablet and a workstation"],
-    a: 1 },
-  { id: 23, ch: "1A", topic: "Computers for Organizations",
-    q: "Supercomputers process speed is measured in:",
-    opts: ["MHz","GHz","FLOPs / TFLOPs","MIPS"],
-    a: 2 },
-  { id: 24, ch: "1A", topic: "Computers for Organizations",
-    q: "1 TFLOP equals:",
-    opts: ["1,000 FLOPS","1,000,000 FLOPS","1,000,000,000,000 FLOPS","1,000 GigaFLOPS only"],
-    a: 2 },
-  { id: 25, ch: "1A", topic: "Computers for Organizations",
-    q: "Supercomputers are used for all of the following EXCEPT:",
-    opts: ["Human Genome calculation","Weather forecasting","Nuclear Fission modeling","Casual web browsing"],
-    a: 3 },
-  { id: 26, ch: "1A", topic: "Computers for Organizations",
-    q: "The Linpack Benchmark evaluates:",
-    opts: ["Network bandwidth","Floating point rate of execution of a computer","Hard disk read speed","RAM latency"],
-    a: 1 },
-  { id: 27, ch: "1A", topic: "Computers for Organizations",
-    q: "The Linpack Benchmark was formulated by:",
-    opts: ["Tim Berners-Lee","Bill Gates","Jack Dongarra","Steve Jobs"],
-    a: 2 },
-
-  // --- Computers in Society ---
-  { id: 28, ch: "1A", topic: "Computers in Society",
-    q: "Computers at home are primarily used for:",
-    opts: ["Nuclear testing","Business, entertainment, communication, and education","Only gaming","Only office work"],
-    a: 1 },
-  { id: 29, ch: "1A", topic: "Computers in Society",
-    q: "In education, computers and ICT enable learners to:",
-    opts: ["Replace teachers entirely","Teach, learn, share ideas, and solve problems efficiently","Only watch videos","Only take multiple-choice tests"],
-    a: 1 },
-  { id: 30, ch: "1A", topic: "Computers in Society",
-    q: "Which two major e-learning revolutions are mentioned in the slides?",
-    opts: ["CD-ROM learning and TV learning","Mobile Learning (ML) and E-Learning (EL)","Virtual Reality and Augmented Reality","Classroom AI and Smart Boards"],
-    a: 1 },
-  { id: 31, ch: "1A", topic: "Computers in Society",
-    q: "Computers in industry are used to design products and:",
-    opts: ["Print annual reports","Automate assembly lines","Manage HR payroll only","Browse social media"],
-    a: 1 },
-  { id: 32, ch: "1A", topic: "Computers in Society",
-    q: "Governments use computers to track all of the following EXCEPT:",
-    opts: ["Population data","Police records","Tax collection","Running personal social media accounts"],
-    a: 3 },
-  { id: 33, ch: "1A", topic: "Computers in Society",
-    q: "Which sector was among the FIRST to use computers?",
-    opts: ["Entertainment","Healthcare","Government","Education"],
-    a: 2 },
-  { id: 34, ch: "1A", topic: "Computers in Society",
-    q: "Computers have revolutionized healthcare by enabling:",
-    opts: ["New treatments, better scheduling, and safer medicine delivery","Complete replacement of doctors","Only hospital billing","Only medical imaging"],
-    a: 0 },
-  { id: 35, ch: "1A", topic: "Computers in Society",
-    q: "Computers are important to society because they:",
-    opts: ["Are entertaining","Provide and help manage critical information","Are inexpensive","Are portable"],
-    a: 1 },
-
-  // ════════════════════════════════════════
-  // CHAPTER 1B – Looking Inside the Computer
-  // ════════════════════════════════════════
-
-  // --- Four Parts of a Computer System ---
-  { id: 36, ch: "1B", topic: "Four Parts of a Computer System",
-    q: "A computer system consists of how many main parts?",
-    opts: ["Two","Three","Four","Five"],
-    a: 2 },
-  { id: 37, ch: "1B", topic: "Four Parts of a Computer System",
-    q: "Which of the four parts of a computer system is considered MOST important?",
-    opts: ["Hardware","Software","Data","User"],
-    a: 3 },
-  { id: 38, ch: "1B", topic: "Four Parts of a Computer System",
-    q: "Hardware is best defined as:",
-    opts: ["A set of instructions","The physical devices/components of the computer","Pieces of information","Operating system files"],
-    a: 1 },
-  { id: 39, ch: "1B", topic: "Four Parts of a Computer System",
-    q: "Software is also called a:",
-    opts: ["File","Program","Device","Network"],
-    a: 1 },
-  { id: 40, ch: "1B", topic: "Four Parts of a Computer System",
-    q: "Data in a computer system refers to:",
-    opts: ["Finished reports","Pieces of information that the computer organizes","The user's identity","Software programs"],
-    a: 1 },
-  { id: 41, ch: "1B", topic: "Four Parts of a Computer System",
-    q: "A 'userless' computer system is one that:",
-    opts: ["Has no monitor","Runs without any user input (automated)","Has no RAM","Runs only system software"],
-    a: 1 },
-
-  // --- Information Processing Cycle ---
-  { id: 42, ch: "1B", topic: "Information Processing Cycle",
-    q: "The correct order of the Information Processing Cycle is:",
-    opts: ["Output → Input → Process → Store","Input → Process → Output → Storage","Process → Input → Output → Store","Store → Process → Input → Output"],
-    a: 1 },
-  { id: 43, ch: "1B", topic: "Information Processing Cycle",
-    q: "Which step in the Information Processing Cycle is OPTIONAL?",
-    opts: ["Input","Processing","Output","Storage"],
-    a: 3 },
-  { id: 44, ch: "1B", topic: "Information Processing Cycle",
-    q: "The Information Processing Cycle is also known as:",
-    opts: ["The Computer Boot Sequence","The Basic Operation of Computer","The Software Lifecycle","The Hardware Cycle"],
-    a: 1 },
-
-  // --- Essential Hardware: Processing ---
-  { id: 45, ch: "1B", topic: "Hardware – Processing",
-    q: "Processing devices are mounted on the:",
-    opts: ["Hard drive","Power supply unit","Motherboard","RAM module"],
-    a: 2 },
-  { id: 46, ch: "1B", topic: "Hardware – Processing",
-    q: "The CPU is described as the _____ of the computer.",
-    opts: ["Heart","Brain","Spine","Lungs"],
-    a: 1 },
-  { id: 47, ch: "1B", topic: "Hardware – Processing",
-    q: "Examples of secondary processors include:",
-    opts: ["Hard drives and USB ports","Advanced graphics cards or math coprocessors","Monitors and keyboards","RAM and ROM"],
-    a: 1 },
-  { id: 48, ch: "1B", topic: "Hardware – Processing",
-    q: "Processors are made of:",
-    opts: ["Plastic and gold","Silicon and copper","Aluminum and steel","Glass and rubber"],
-    a: 1 },
-  { id: 49, ch: "1B", topic: "Hardware – Processing",
-    q: "The CPU carries out:",
-    opts: ["Only storage operations","Instructions from the program and manipulates data","Only input operations","Only output operations"],
-    a: 1 },
-
-  // --- Essential Hardware: Memory ---
-  { id: 50, ch: "1B", topic: "Hardware – Memory",
-    q: "RAM stands for:",
-    opts: ["Read Access Memory","Random Access Memory","Rapid Application Module","Remote Access Memory"],
-    a: 1 },
-  { id: 51, ch: "1B", topic: "Hardware – Memory",
-    q: "RAM is described as 'volatile' because:",
-    opts: ["It is very fast","It loses all data when power is turned off","It stores data permanently","It can only be read, not written"],
-    a: 1 },
-  { id: 52, ch: "1B", topic: "Hardware – Memory",
-    q: "RAM stores:",
-    opts: ["The computer's boot directions permanently","Current running data and programs","Files saved to hard disk","The BIOS only"],
-    a: 1 },
-  { id: 53, ch: "1B", topic: "Hardware – Memory",
-    q: "Having more RAM directly results in:",
-    opts: ["A slower system","More permanent storage","A faster system","Better graphics only"],
-    a: 2 },
-  { id: 54, ch: "1B", topic: "Hardware – Memory",
-    q: "ROM stands for:",
-    opts: ["Random Output Memory","Read Only Memory","Rapid Operating Memory","Remote Output Module"],
-    a: 1 },
-  { id: 55, ch: "1B", topic: "Hardware – Memory",
-    q: "ROM permanently stores:",
-    opts: ["User documents","Current programs in use","The computer's boot directions","Application software"],
-    a: 2 },
-  { id: 56, ch: "1B", topic: "Hardware – Memory",
-    q: "The basic unit of computer memory is the:",
-    opts: ["Bit","Byte","Kilobyte","Megabyte"],
-    a: 1 },
-
-  // --- Essential Hardware: Storage ---
-  { id: 57, ch: "1B", topic: "Hardware – Storage",
-    q: "Storage devices differ from RAM because they:",
-    opts: ["Are faster","Hold data and programs permanently","Are located on the motherboard","Store only the operating system"],
-    a: 1 },
-  { id: 58, ch: "1B", topic: "Hardware – Storage",
-    q: "Magnetic storage includes:",
-    opts: ["CD and DVD drives","Floppy disks and hard drives","Blu-ray drives","USB flash drives"],
-    a: 1 },
-  { id: 59, ch: "1B", topic: "Hardware – Storage",
-    q: "Magnetic storage devices access data using:",
-    opts: ["A laser","A magnet","Electrical pulses","Radio waves"],
-    a: 1 },
-  { id: 60, ch: "1B", topic: "Hardware – Storage",
-    q: "Optical storage devices include:",
-    opts: ["Floppy and hard drives","CD and DVD drives","USB drives","Magnetic tapes"],
-    a: 1 },
-  { id: 61, ch: "1B", topic: "Hardware – Storage",
-    q: "Optical storage devices access data using:",
-    opts: ["A magnet","An electric current","A laser","Infrared radiation"],
-    a: 2 },
-
-  // --- Essential Hardware: Input/Output ---
-  { id: 62, ch: "1B", topic: "Hardware – Input/Output",
-    q: "Input devices allow the user to:",
-    opts: ["Receive data from the computer","Interact with and send data to the computer","Store files permanently","Display output on screen"],
-    a: 1 },
-  { id: 63, ch: "1B", topic: "Hardware – Input/Output",
-    q: "Examples of input devices include:",
-    opts: ["Monitor and printer","Keyboard and mouse","Speaker and projector","Hard drive and RAM"],
-    a: 1 },
-  { id: 64, ch: "1B", topic: "Hardware – Input/Output",
-    q: "Output devices deliver data and allow the computer to:",
-    opts: ["Accept user data","Interact with the user","Store data permanently","Process instructions"],
-    a: 1 },
-  { id: 65, ch: "1B", topic: "Hardware – Input/Output",
-    q: "Examples of output devices include:",
-    opts: ["Keyboard and mouse","Monitor, printer, and speaker","CD-ROM and hard drive","Scanner and webcam"],
-    a: 1 },
-  { id: 66, ch: "1B", topic: "Hardware – Input/Output",
-    q: "Which device acts as BOTH input and output?",
-    opts: ["Keyboard","Printer","Touch screen","Hard drive"],
-    a: 2 },
-  { id: 67, ch: "1B", topic: "Hardware – Input/Output",
-    q: "Hardware in a computer system is categorized into how many types?",
-    opts: ["Two","Three","Four","Five"],
-    a: 2 },
-
-  // --- Software ---
-  { id: 68, ch: "1B", topic: "Software",
-    q: "There are how many main types of software?",
-    opts: ["One","Two","Three","Four"],
-    a: 1 },
-  { id: 69, ch: "1B", topic: "Software",
-    q: "System software is considered the _____ software.",
-    opts: ["Least important","Most common","Most important","Most expensive"],
-    a: 2 },
-  { id: 70, ch: "1B", topic: "Software",
-    q: "An Operating System is an example of:",
-    opts: ["Application software","System software","Utility software","Network software"],
-    a: 1 },
-  { id: 71, ch: "1B", topic: "Software",
-    q: "Which of the following is NOT listed as an operating system in the slides?",
-    opts: ["Windows 10","Ubuntu","Linux","Oracle Database"],
-    a: 3 },
-  { id: 72, ch: "1B", topic: "Software",
-    q: "Windows Server 2003 is an example of a:",
-    opts: ["Desktop OS","Network Operating System","Utility software","Application software"],
-    a: 1 },
-  { id: 73, ch: "1B", topic: "Software",
-    q: "Symantec Antivirus is classified as:",
-    opts: ["Application software","Operating system","Utility software","Network OS"],
-    a: 2 },
-  { id: 74, ch: "1B", topic: "Software",
-    q: "Application software is designed to:",
-    opts: ["Manage system hardware","Accomplish a specific user task","Provide network access","Boot the computer"],
-    a: 1 },
-  { id: 75, ch: "1B", topic: "Software",
-    q: "MS Word is an example of:",
-    opts: ["System software","Application software","Utility software","Firmware"],
-    a: 1 },
-  { id: 76, ch: "1B", topic: "Software",
-    q: "Application software is described as the _____ type of software.",
-    opts: ["Most important","Most common","Least used","Most expensive"],
-    a: 1 },
-
-  // --- Data ---
-  { id: 77, ch: "1B", topic: "Data",
-    q: "Computer data is a fact with:",
-    opts: ["Full meaning on its own","No meaning on its own until processed","Always an attached label","Always a numerical value"],
-    a: 1 },
-  { id: 78, ch: "1B", topic: "Data",
-    q: "Computer data is stored using the:",
-    opts: ["Decimal number system","Hexadecimal system","Binary number system","Octal system"],
-    a: 2 },
-  { id: 79, ch: "1B", topic: "Data",
-    q: "Data in a computer can be organized into:",
-    opts: ["Packets","Files","Streams","Registers only"],
-    a: 1 },
-
-  // ════════════════════════════════════════
-  // CHAPTER 2A – Internet and the WWW
-  // ════════════════════════════════════════
-
-  // --- Internet History ---
-  { id: 80, ch: "2A", topic: "Internet History",
-    q: "ARPANET was established in:",
-    opts: ["1965","1969","1973","1983"],
-    a: 1 },
-  { id: 81, ch: "2A", topic: "Internet History",
-    q: "ARPANET stands for:",
-    opts: ["Advanced Research Projects Agency Network","American Research Protocol and Technology Network","Applied Research Program for Advanced Networks","Automated Research Protocol Agency Network"],
-    a: 0 },
-  { id: 82, ch: "2A", topic: "Internet History",
-    q: "ARPANET was developed by the:",
-    opts: ["NASA","NSF","Department of Defense","Department of Commerce"],
-    a: 2 },
-  { id: 83, ch: "2A", topic: "Internet History",
-    q: "ARPANET originally connected:",
-    opts: ["Banks and corporations","Universities and defense bases","Hospitals and clinics","Government tax offices"],
-    a: 1 },
-  { id: 84, ch: "2A", topic: "Internet History",
-    q: "ARPANET first connected to Europe in:",
-    opts: ["1969","1973","1980","1990"],
-    a: 1 },
-  { id: 85, ch: "2A", topic: "Internet History",
-    q: "NSFNet stands for:",
-    opts: ["National Software Foundation Network","National Science Foundation Network","Network Security Framework Net","New Standard Fiber Network"],
-    a: 1 },
-  { id: 86, ch: "2A", topic: "Internet History",
-    q: "NSFNet was created in the:",
-    opts: ["Early 1970s","Mid-1980s","Early 1990s","Late 1990s"],
-    a: 1 },
-  { id: 87, ch: "2A", topic: "Internet History",
-    q: "NSFNet did NOT allow:",
-    opts: ["University traffic","Defense traffic","Commercial traffic","Scientific traffic"],
-    a: 2 },
-  { id: 88, ch: "2A", topic: "Internet History",
-    q: "NSFNet was a network connecting:",
-    opts: ["Banks","Supercomputers","Hospitals","Home users"],
-    a: 1 },
-  { id: 89, ch: "2A", topic: "Internet History",
-    q: "The World Wide Web was developed in:",
-    opts: ["1985","1990","1993","1999"],
-    a: 2 },
-  { id: 90, ch: "2A", topic: "Internet History",
-    q: "The World Wide Web was developed by:",
-    opts: ["Bill Gates","Jack Dongarra","Tim Berners-Lee","Steve Jobs"],
-    a: 2 },
-  { id: 91, ch: "2A", topic: "Internet History",
-    q: "In the 1990s, what replaced ARPANET and NSFNet?",
-    opts: ["Satellite networks","Commercial networks","Government-only networks","University networks"],
-    a: 1 },
-
-  // --- Accessing the Internet ---
-  { id: 92, ch: "2A", topic: "Accessing the Internet",
-    q: "An ISP (Internet Service Provider) is:",
-    opts: ["A web browser","A company that provides Internet access","A type of hardware modem","A search engine"],
-    a: 1 },
-  { id: 93, ch: "2A", topic: "Accessing the Internet",
-    q: "Dialup internet connects through a:",
-    opts: ["Fiber optic cable","Phone line via a modem","Satellite dish","Cable TV line"],
-    a: 1 },
-  { id: 94, ch: "2A", topic: "Accessing the Internet",
-    q: "DSL stands for:",
-    opts: ["Data Speed Link","Digital Subscriber Line","Direct Satellite Link","Dynamic Signal Loop"],
-    a: 1 },
-  { id: 95, ch: "2A", topic: "Accessing the Internet",
-    q: "One advantage of DSL over dialup is that you can:",
-    opts: ["Download faster but not call","Use phone and internet simultaneously","Share the connection with neighbors","Connect without a modem"],
-    a: 1 },
-  { id: 96, ch: "2A", topic: "Accessing the Internet",
-    q: "Cable internet uses the same line as:",
-    opts: ["Telephone","Cable TV","Satellite TV","DSL"],
-    a: 1 },
-  { id: 97, ch: "2A", topic: "Accessing the Internet",
-    q: "A disadvantage of cable internet is that:",
-    opts: ["It cannot carry voice calls","Many users in an area share the connection","It is slower than DSL","It requires a phone line"],
-    a: 1 },
-  { id: 98, ch: "2A", topic: "Accessing the Internet",
-    q: "High-speed internet is generally how much faster than dialup?",
-    opts: ["Same speed","2–25 times faster","50–100 times faster","100–200 times faster"],
-    a: 1 },
-
-  // --- Understanding the Internet / WWW ---
-  { id: 99,  ch: "2A", topic: "Understanding the Internet",
-    q: "Documents on the Web are connected via:",
-    opts: ["FTP links","Hypertext links","Email attachments","Database queries"],
-    a: 1 },
-  { id: 100, ch: "2A", topic: "Understanding the Internet",
-    q: "Web documents are stored on a:",
-    opts: ["Local hard drive","Web server","ISP modem","Browser cache"],
-    a: 1 },
-  { id: 101, ch: "2A", topic: "Understanding the Internet",
-    q: "HTTP is responsible for:",
-    opts: ["Encrypting emails","Delivering HTML documents across the web","Assigning IP addresses","Running FTP transfers"],
-    a: 1 },
-  { id: 102, ch: "2A", topic: "Understanding the Internet",
-    q: "A website is a collection of:",
-    opts: ["Emails","Web pages (documents)","FTP files","Database tables"],
-    a: 1 },
-  { id: 103, ch: "2A", topic: "Understanding the Internet",
-    q: "HTML describes how pages should look using:",
-    opts: ["Scripts","Tags that enclose content: <tag>content</tag>","Binary code","SQL queries"],
-    a: 1 },
-  { id: 104, ch: "2A", topic: "Understanding the Internet",
-    q: "HTML stands for:",
-    opts: ["Hyper Transfer Markup Language","HyperText Markup Language","High-Tech Machine Language","Hyperlink Text Module Language"],
-    a: 1 },
-  { id: 105, ch: "2A", topic: "Understanding the Internet",
-    q: "A browser's main function is to:",
-    opts: ["Send emails","Read and translate HTML, then display web content","Store files on a server","Run antivirus software"],
-    a: 1 },
-  { id: 106, ch: "2A", topic: "Understanding the Internet",
-    q: "URL stands for:",
-    opts: ["Universal Research Link","Uniform Resource Locator","Unified Remote Location","Universal Retrieval Language"],
-    a: 1 },
-  { id: 107, ch: "2A", topic: "Understanding the Internet",
-    q: "Plug-ins are used to:",
-    opts: ["Block advertisements","Enhance a browser's functionality","Provide antivirus protection","Speed up dialup connections"],
-    a: 1 },
-  { id: 108, ch: "2A", topic: "Understanding the Internet",
-    q: "Streaming audio/video works by:",
-    opts: ["Downloading the entire file before playing","Sending the file in small chunks that play while others download","Compressing files to zero size","Using FTP to transfer audio"],
-    a: 1 },
-
-  // --- Using a Browser ---
-  { id: 109, ch: "2A", topic: "Using a Browser",
-    q: "When a browser opens, it starts on the:",
-    opts: ["Search engine","Home page","Last visited page","Settings page"],
-    a: 1 },
-  { id: 110, ch: "2A", topic: "Using a Browser",
-    q: "Hyperlinks on the web are typically displayed as:",
-    opts: ["Red bold words","Blue underlined words","Green italic words","Orange words"],
-    a: 1 },
-  { id: 111, ch: "2A", topic: "Using a Browser",
-    q: "An image map is:",
-    opts: ["A diagram of network topology","A picture that contains clickable links","A type of HTML tag","A map of image servers"],
-    a: 1 },
-
-  // --- Searching the Web ---
-  { id: 112, ch: "2A", topic: "Searching the Web",
-    q: "Web directories:",
-    opts: ["Find sites by keyword","Categorize the Internet by topic","Search multiple sites at once","Filter spam email"],
-    a: 1 },
-  { id: 113, ch: "2A", topic: "Searching the Web",
-    q: "Search engines find sites by:",
-    opts: ["Category","Keyword","Color","File size"],
-    a: 1 },
-  { id: 114, ch: "2A", topic: "Searching the Web",
-    q: "A metasearch site:",
-    opts: ["Searches only one website","Searches several websites simultaneously","Is an internal site search","Is a paid listing service"],
-    a: 1 },
-  { id: 115, ch: "2A", topic: "Searching the Web",
-    q: "Sponsored links are sites that:",
-    opts: ["Appear organically based on content","Pay for better search result placement","Are government-verified","Are academic sources only"],
-    a: 1 },
-  { id: 116, ch: "2A", topic: "Searching the Web",
-    q: "To search for an exact phrase, you should:",
-    opts: ["Use the keyword OR","Put the phrase in quotes","Use the keyword NOT","Use the NEAR keyword"],
-    a: 1 },
-  { id: 117, ch: "2A", topic: "Searching the Web",
-    q: "To find pages containing two specific terms, you use:",
-    opts: ["OR","NOT","AND","NEAR"],
-    a: 2 },
-  { id: 118, ch: "2A", topic: "Searching the Web",
-    q: "Which is NOT listed as a search technique in the slides?",
-    opts: ["Quote the exact phrase","Use keyword AND","Use keyword NEAR","Use keyword OR"],
-    a: 3 },
-
-  // --- Internet Services (Ch 2A) ---
-  { id: 119, ch: "2A", topic: "Internet Services",
-    q: "Chat on the Internet is described as:",
-    opts: ["Private real-time conversation","Public real-time conversation","Email-based discussion","Delayed messaging"],
-    a: 1 },
-  { id: 120, ch: "2A", topic: "Internet Services",
-    q: "Instant messaging is described as:",
-    opts: ["Public real-time conversation","Private real-time conversation","A type of newsgroup","An FTP service"],
-    a: 1 },
-  { id: 121, ch: "2A", topic: "Internet Services",
-    q: "It is illegal in P2P networks to share:",
-    opts: ["Public domain files","Copyrighted material","Your own photos","Open-source software"],
-    a: 1 },
-  { id: 122, ch: "2A", topic: "Internet Services",
-    q: "Napster was launched in:",
-    opts: ["1995","1999","2001","2003"],
-    a: 1 },
-  { id: 123, ch: "2A", topic: "Internet Services",
-    q: "In a P2P network, each computer can act as:",
-    opts: ["Only a client","Only a server","Both a client and a server","Neither a client nor a server"],
-    a: 2 },
-  { id: 124, ch: "2A", topic: "Internet Services",
-    q: "FTP stands for:",
-    opts: ["Fast Transfer Protocol","File Transfer Protocol","Frequent Transfer Process","Fiber Transmission Protocol"],
-    a: 1 },
-  { id: 125, ch: "2A", topic: "Internet Services",
-    q: "Newsgroups are electronic discussions organized by:",
-    opts: ["Date","User name","Topic","File size"],
-    a: 2 },
-  { id: 126, ch: "2A", topic: "Internet Services",
-    q: "The WWW required which type of software to read documents?",
-    opts: ["Word processor","Browser","FTP client","Email client"],
-    a: 1 },
-
-  // ════════════════════════════════════════
-  // CHAPTER 2B – Email and Other Internet Services
-  // ════════════════════════════════════════
-
-  // --- Using Email ---
-  { id: 127, ch: "2B", topic: "Using Email",
-    q: "How quickly does an email reach its destination?",
-    opts: ["Within an hour","Within seconds","Within a day","Within minutes only"],
-    a: 1 },
-  { id: 128, ch: "2B", topic: "Using Email",
-    q: "Email messages can contain:",
-    opts: ["Text only","Text, audio, pictures, and video","Only attachments","Only text and images"],
-    a: 1 },
-  { id: 129, ch: "2B", topic: "Using Email",
-    q: "Email waits for the recipient in a:",
-    opts: ["Browser cache","Server log","Mailbox","Newsgroup thread"],
-    a: 2 },
-  { id: 130, ch: "2B", topic: "Using Email",
-    q: "To configure a desktop email client, you need:",
-    opts: ["A web browser only","Name of mail server, username, and password","Only a username","Only a password"],
-    a: 1 },
-  { id: 131, ch: "2B", topic: "Using Email",
-    q: "Outlook and Eudora are examples of:",
-    opts: ["Web-based email clients","Desktop email clients requiring configuration","FTP clients","News reader programs"],
-    a: 1 },
-  { id: 132, ch: "2B", topic: "Using Email",
-    q: "Hotmail and Yahoo Mail are described as:",
-    opts: ["Desktop clients needing configuration","Online clients needing NO configuration","FTP servers","IRC channels"],
-    a: 1 },
-  { id: 133, ch: "2B", topic: "Using Email",
-    q: "The standard email address format is:",
-    opts: ["isp@username.com","username@isp.com","username.isp@com","www.username@isp"],
-    a: 1 },
-  { id: 134, ch: "2B", topic: "Using Email",
-    q: "A Listserv is:",
-    opts: ["A web server list","A list of email addresses where each address receives the same message","A spam filter","An antivirus database"],
-    a: 1 },
-  { id: 135, ch: "2B", topic: "Using Email",
-    q: "Which of the following is NOT a standard email action listed in the slides?",
-    opts: ["Reply","Forward","Send an attachment","Create a newsgroup thread"],
-    a: 3 },
-
-  // --- Other Internet Features ---
-  { id: 136, ch: "2B", topic: "Other Internet Features",
-    q: "Messages in a newsgroup are organized into:",
-    opts: ["Channels","Buddy lists","Threads","Folders"],
-    a: 2 },
-  { id: 137, ch: "2B", topic: "Other Internet Features",
-    q: "To read newsgroups you need:",
-    opts: ["A web browser","A news reader program","An FTP client","An IRC client"],
-    a: 1 },
-  { id: 138, ch: "2B", topic: "Other Internet Features",
-    q: "In newsgroups, the topics that users discuss are called:",
-    opts: ["Channels","Threads","Buddy lists","Listservs"],
-    a: 1 },
-  { id: 139, ch: "2B", topic: "Other Internet Features",
-    q: "FTP (File Transfer Protocol) is used to:",
-    opts: ["Send emails","Copy files from a remote computer","Chat in real time","Browse web pages"],
-    a: 1 },
-  { id: 140, ch: "2B", topic: "Other Internet Features",
-    q: "To use FTP, you need:",
-    opts: ["A web browser","An FTP client","A news reader","An IM client"],
-    a: 1 },
-  { id: 141, ch: "2B", topic: "Other Internet Features",
-    q: "Some FTP sites require:",
-    opts: ["A credit card","A password","A VPN","A static IP"],
-    a: 1 },
-  { id: 142, ch: "2B", topic: "Other Internet Features",
-    q: "IRC stands for:",
-    opts: ["Internet Relay Chat","Internal Remote Connection","Integrated Real-time Communication","Internet Request Channel"],
-    a: 0 },
-  { id: 143, ch: "2B", topic: "Other Internet Features",
-    q: "IRC supports:",
-    opts: ["Single private conversations only","Multi-user communication across many channels","Email-based discussion","File-only transfers"],
-    a: 1 },
-  { id: 144, ch: "2B", topic: "Other Internet Features",
-    q: "In IRC, each channel (room) is dedicated to:",
-    opts: ["A specific file size","A specific topic","A single user","A specific geographic region"],
-    a: 1 },
-  { id: 145, ch: "2B", topic: "Other Internet Features",
-    q: "In IRC, messages posted in a channel can be read by:",
-    opts: ["Only the sender","Only the channel moderator","All users in that channel","Only subscribed users"],
-    a: 2 },
-  { id: 146, ch: "2B", topic: "Other Internet Features",
-    q: "Instant Messaging (IM) differs from IRC because IM is:",
-    opts: ["Public and multi-user","Private and sent only to listed users (buddy list)","Stored in newsgroups","Sent via FTP"],
-    a: 1 },
-  { id: 147, ch: "2B", topic: "Other Internet Features",
-    q: "A Buddy List in IM contains:",
-    opts: ["FTP server addresses","The names of IM contacts","Email mailing lists","IRC channel names"],
-    a: 1 },
-  { id: 148, ch: "2B", topic: "Other Internet Features",
-    q: "An online service (e.g., America Online) is accessed by:",
-    opts: ["Free registration","Subscription","One-time payment only","Government license"],
-    a: 1 },
-  { id: 149, ch: "2B", topic: "Other Internet Features",
-    q: "Online services like AOL offer:",
-    opts: ["Only email","Both content (banks, games, research) and Internet access","Only FTP access","Only news reading"],
-    a: 1 },
-  { id: 150, ch: "2B", topic: "Other Internet Features",
-    q: "In a P2P (peer-to-peer) service, there is:",
-    opts: ["A powerful central server","No centralized organization","A mandatory subscription","An FTP-only connection"],
-    a: 1 },
-];
-
-function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
-}
-
-const CHAPTERS = ["All", "1A", "1B", "2A", "2B"];
-const CH_LABELS = { All: "All", "1A": "Ch 1A", "1B": "Ch 1B", "2A": "Ch 2A", "2B": "Ch 2B" };
-
-function Quiz() {
-  const [screen, setScreen] = useState("home");
-  const [filter, setFilter] = useState("All");
-  const [pool, setPool] = useState([]);
-  const [cur, setCur] = useState(0);
-  const [sel, setSel] = useState(null);
-  const [confirmed, setConfirmed] = useState(false);
-  const [score, setScore] = useState(0);
-  const [log, setLog] = useState([]);
-  const [showReview, setShowReview] = useState(false);
-  const [revFilter, setRevFilter] = useState("all");
-
-  function start() {
-    let qs = filter === "All" ? ALL_QUESTIONS : ALL_QUESTIONS.filter(q => q.ch === filter);
-    qs = shuffle(qs).map(q => ({ ...q, shuffled: shuffle(q.opts.map((o, i) => ({ t: o, i }))) }));
-    setPool(qs); setCur(0); setSel(null); setConfirmed(false);
-    setScore(0); setLog([]); setShowReview(false); setScreen("quiz");
-  }
-
-  function confirm() {
-    if (sel === null) return;
-    const q = pool[cur];
-    const ok = q.shuffled[sel].i === q.a;
-    if (ok) setScore(s => s + 1);
-    setLog(l => [...l, { q: q.q, ch: q.ch, topic: q.topic, ok, chosen: q.shuffled[sel].t, correct: q.opts[q.a] }]);
-    setConfirmed(true);
-  }
-
-  function next() {
-    if (cur + 1 >= pool.length) { setScreen("results"); return; }
-    setCur(c => c + 1); setSel(null); setConfirmed(false);
-  }
-
-  const q = pool[cur];
-  const total = pool.length;
-  const pct = total > 0 ? Math.round((score / total) * 100) : 0;
-  const gc = pct >= 90 ? "#22c55e" : pct >= 75 ? "#60a5fa" : pct >= 60 ? "#fbbf24" : "#f87171";
-  const grade = pct >= 90 ? "Excellent 🏆" : pct >= 75 ? "Great Job 👍" : pct >= 60 ? "Passing ✅" : "Needs Work 📚";
-
-  const count = (f) => f === "All" ? ALL_QUESTIONS.length : ALL_QUESTIONS.filter(q => q.ch === f).length;
-  const reviewLog = revFilter === "wrong" ? log.filter(r => !r.ok) : revFilter === "correct" ? log.filter(r => r.ok) : log;
-
-  const s = {
-    page: { minHeight: "100vh", background: "#0a0a14", fontFamily: "'Segoe UI',sans-serif", color: "#e2e8f0", padding: "16px 12px" },
-    card: { background: "rgba(255,255,255,0.04)", borderRadius: 20, padding: 26, border: "1px solid rgba(124,58,237,0.22)" },
-    btn: (active) => ({ padding: "10px 6px", borderRadius: 12, border: active ? "2px solid #a78bfa" : "2px solid rgba(255,255,255,0.07)", background: active ? "rgba(167,139,250,0.18)" : "rgba(255,255,255,0.03)", color: active ? "#c084fc" : "#64748b", cursor: "pointer", fontWeight: 700, fontSize: 12, transition: "all .18s", width: "100%" }),
-    startBtn: { width: "100%", padding: "15px", borderRadius: 14, background: "linear-gradient(135deg,#7c3aed,#4f46e5)", color: "#fff", border: "none", fontSize: 16, fontWeight: 800, cursor: "pointer", boxShadow: "0 0 40px rgba(124,58,237,0.3)", marginTop: 6 },
-    optBtn: (state) => {
-      const colors = { default: ["rgba(255,255,255,0.04)","rgba(255,255,255,0.08)","#94a3b8"], selected: ["rgba(124,58,237,0.2)","#a78bfa","#e9d5ff"], correct: ["rgba(34,197,94,0.12)","#22c55e","#86efac"], wrong: ["rgba(248,113,113,0.12)","#f87171","#fca5a5"] };
-      const [bg, border, col] = colors[state] || colors.default;
-      return { textAlign: "left", padding: "12px 15px", borderRadius: 12, background: bg, border: `1px solid ${border}`, color: col, cursor: state === "default" || state === "selected" ? "pointer" : "default", fontSize: 14, transition: "all .15s", fontFamily: "inherit", display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", boxSizing: "border-box" };
+<!-- PWA Manifest inline via JS -->
+<script>
+  const manifest = {
+    name: "ReelsVault",
+    short_name: "ReelsVault",
+    description: "Save your favourite reels in one place",
+    start_url: ".",
+    display: "standalone",
+    background_color: "#0a0a0f",
+    theme_color: "#0a0a0f",
+    icons: [
+      { src: "https://via.placeholder.com/192x192/8b5cf6/ffffff?text=RV", sizes: "192x192", type: "image/png" },
+      { src: "https://via.placeholder.com/512x512/8b5cf6/ffffff?text=RV", sizes: "512x512", type: "image/png" }
+    ],
+    share_target: {
+      action: ".",
+      method: "GET",
+      params: { url: "shared_url", title: "shared_title", text: "shared_text" }
     }
   };
+  const blob = new Blob([JSON.stringify(manifest)], { type: "application/json" });
+  const mlink = document.createElement("link");
+  mlink.rel = "manifest";
+  mlink.href = URL.createObjectURL(blob);
+  document.head.appendChild(mlink);
+</script>
 
-  return (
-    <div style={s.page}>
-      <div style={{ maxWidth: 680, margin: "0 auto" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 18 }}>
-          <div style={{ fontSize: 10, letterSpacing: 5, color: "#7c3aed", textTransform: "uppercase", marginBottom: 3 }}>Muhammad Hassan · Exam Prep</div>
-          <h1 style={{ fontSize: 22, fontWeight: 900, margin: "0 0 3px", background: "linear-gradient(90deg,#a78bfa,#60a5fa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Introduction to Computers</h1>
-          <div style={{ fontSize: 12, color: "#374151" }}>{ALL_QUESTIONS.length} Questions · Chapters 1A · 1B · 2A · 2B</div>
-        </div>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 
-        {/* HOME */}
-        {screen === "home" && (
-          <div style={s.card}>
-            <div style={{ fontSize: 13, color: "#64748b", textAlign: "center", marginBottom: 16 }}>Select a chapter to practice, or do all at once:</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 7, marginBottom: 22 }}>
-              {CHAPTERS.map(c => (
-                <button key={c} onClick={() => setFilter(c)} style={s.btn(filter === c)}>
-                  {CH_LABELS[c]}
-                  <div style={{ fontSize: 10, fontWeight: 400, marginTop: 2, color: filter === c ? "#a78bfa" : "#374151" }}>{count(c)}Q</div>
-                </button>
-              ))}
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 20 }}>
-              {[
-                { ch: "1A", t: "Ch 1A — Intro to Computers", d: "Types, classification, society" },
-                { ch: "1B", t: "Ch 1B — Inside the Computer", d: "Hardware, memory, software, I/O" },
-                { ch: "2A", t: "Ch 2A — Internet & WWW", d: "History, access, HTML, searching" },
-                { ch: "2B", t: "Ch 2B — Email & Services", d: "Email, IRC, FTP, IM, P2P" },
-              ].map(x => (
-                <div key={x.ch} onClick={() => { setFilter(x.ch); }} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: "11px 13px", border: `1px solid ${filter === x.ch ? "rgba(124,58,237,0.4)" : "rgba(255,255,255,0.06)"}`, cursor: "pointer" }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: "#a78bfa", marginBottom: 2 }}>{x.t}</div>
-                  <div style={{ fontSize: 11, color: "#374151" }}>{x.d}</div>
-                  <div style={{ fontSize: 11, color: "#6d28d9", marginTop: 3 }}>{count(x.ch)} questions</div>
-                </div>
-              ))}
-            </div>
-            <button onClick={start} style={s.startBtn}>🚀 Start — {count(filter)} Questions</button>
-          </div>
-        )}
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131c;
+    --surface2: #1c1c2a;
+    --border: rgba(255,255,255,0.07);
+    --accent: #a78bfa;
+    --accent2: #f472b6;
+    --accent3: #38bdf8;
+    --text: #f0eeff;
+    --muted: #8880a8;
+    --danger: #f87171;
+    --ig: #e1306c;
+    --tt: #010101;
+    --yt: #ff0000;
+    --tw: #1da1f2;
+    --r: 14px;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
 
-        {/* QUIZ */}
-        {screen === "quiz" && q && (
-          <div style={s.card}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-              <span style={{ fontSize: 11, background: "rgba(124,58,237,0.2)", color: "#a78bfa", borderRadius: 20, padding: "3px 11px", fontWeight: 700 }}>Ch {q.ch} · {q.topic}</span>
-              <span style={{ fontSize: 12, color: "#374151" }}>{cur + 1} / {total}</span>
-            </div>
-            <div style={{ height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 3, marginBottom: 14 }}>
-              <div style={{ height: "100%", width: `${((cur + 1) / total) * 100}%`, background: "linear-gradient(90deg,#7c3aed,#4f46e5)", borderRadius: 3, transition: "width .3s" }} />
-            </div>
-            <div style={{ display: "flex", gap: 14, marginBottom: 16, fontSize: 11 }}>
-              <span style={{ color: "#22c55e" }}>✓ {score} correct</span>
-              <span style={{ color: "#f87171" }}>✗ {cur - score} wrong</span>
-            </div>
-            <div style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.6, marginBottom: 18, color: "#f1f5f9" }}>Q{cur + 1}. {q.q}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 9, marginBottom: 18 }}>
-              {q.shuffled.map((opt, i) => {
-                const isRight = opt.i === q.a;
-                let state = "default";
-                if (i === sel && !confirmed) state = "selected";
-                if (confirmed && isRight) state = "correct";
-                if (confirmed && i === sel && !isRight) state = "wrong";
-                return (
-                  <button key={i} onClick={() => !confirmed && setSel(i)} style={s.optBtn(state)}>
-                    <span><span style={{ fontWeight: 800, color: "#7c3aed", marginRight: 9 }}>{String.fromCharCode(65 + i)}.</span>{opt.t}</span>
-                    {confirmed && isRight && <span>✓</span>}
-                    {confirmed && i === sel && !isRight && <span>✗</span>}
-                  </button>
-                );
-              })}
-            </div>
-            {!confirmed ? (
-              <button onClick={confirm} disabled={sel === null} style={{ ...s.startBtn, background: sel !== null ? "linear-gradient(135deg,#7c3aed,#4f46e5)" : "rgba(255,255,255,0.04)", color: sel !== null ? "#fff" : "#374151", boxShadow: "none", marginTop: 0 }}>Confirm Answer</button>
-            ) : (
-              <div>
-                <div style={{ padding: "11px 14px", borderRadius: 10, marginBottom: 11, fontSize: 13, background: q.shuffled[sel].i === q.a ? "rgba(34,197,94,0.08)" : "rgba(248,113,113,0.08)", color: q.shuffled[sel].i === q.a ? "#86efac" : "#fca5a5", border: `1px solid ${q.shuffled[sel].i === q.a ? "rgba(34,197,94,0.25)" : "rgba(248,113,113,0.25)"}` }}>
-                  {q.shuffled[sel].i === q.a ? "✅ Correct!" : `❌ Wrong. Correct: ${q.opts[q.a]}`}
-                </div>
-                <button onClick={next} style={{ ...s.startBtn, marginTop: 0 }}>{cur + 1 >= total ? "See Results →" : "Next →"}</button>
-              </div>
-            )}
-          </div>
-        )}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        {/* RESULTS */}
-        {screen === "results" && (
-          <div>
-            <div style={{ ...s.card, textAlign: "center", marginBottom: 14 }}>
-              <div style={{ fontSize: 56, fontWeight: 900, color: gc, lineHeight: 1 }}>{pct}%</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: gc, margin: "6px 0 4px" }}>{grade}</div>
-              <div style={{ fontSize: 14, color: "#4b5563" }}><span style={{ color: "#22c55e", fontWeight: 700 }}>{score}</span> correct · <span style={{ color: "#f87171", fontWeight: 700 }}>{total - score}</span> wrong · {total} total</div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 7, margin: "18px 0 20px" }}>
-                {["1A","1B","2A","2B"].map(ch => {
-                  const cl = log.filter(r => r.ch === ch);
-                  if (!cl.length) return null;
-                  const cs = cl.filter(r => r.ok).length;
-                  const cp = Math.round((cs / cl.length) * 100);
-                  return (
-                    <div key={ch} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 11, padding: "9px 13px", border: "1px solid rgba(255,255,255,0.05)", textAlign: "left" }}>
-                      <div style={{ fontSize: 11, color: "#7c3aed", fontWeight: 700, marginBottom: 2 }}>Chapter {ch}</div>
-                      <div style={{ fontSize: 20, fontWeight: 800, color: cp >= 70 ? "#22c55e" : "#f87171" }}>{cp}%</div>
-                      <div style={{ fontSize: 11, color: "#374151" }}>{cs}/{cl.length}</div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div style={{ display: "flex", gap: 9, justifyContent: "center", flexWrap: "wrap" }}>
-                <button onClick={() => setShowReview(!showReview)} style={{ padding: "9px 20px", borderRadius: 50, background: "rgba(124,58,237,0.12)", border: "1px solid #7c3aed", color: "#a78bfa", cursor: "pointer", fontWeight: 600, fontSize: 12 }}>
-                  {showReview ? "Hide Review" : "📋 Review Answers"}
-                </button>
-                <button onClick={() => setScreen("home")} style={{ padding: "9px 20px", borderRadius: 50, background: "linear-gradient(135deg,#7c3aed,#4f46e5)", border: "none", color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 12 }}>
-                  🔁 Try Again
-                </button>
-              </div>
-            </div>
-            {showReview && (
-              <div>
-                <div style={{ display: "flex", gap: 7, marginBottom: 12 }}>
-                  {[["all","All"],["wrong","Wrong Only"],["correct","Correct Only"]].map(([v,l]) => (
-                    <button key={v} onClick={() => setRevFilter(v)} style={{ padding: "6px 14px", borderRadius: 50, fontSize: 11, fontWeight: 600, cursor: "pointer", border: revFilter === v ? "1px solid #a78bfa" : "1px solid rgba(255,255,255,0.07)", background: revFilter === v ? "rgba(167,139,250,0.12)" : "transparent", color: revFilter === v ? "#c084fc" : "#374151" }}>{l}</button>
-                  ))}
-                  <span style={{ fontSize: 11, color: "#374151", marginLeft: "auto", alignSelf: "center" }}>{reviewLog.length} shown</span>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
-                  {reviewLog.map((r, i) => (
-                    <div key={i} style={{ background: r.ok ? "rgba(34,197,94,0.05)" : "rgba(248,113,113,0.05)", borderRadius: 13, padding: "13px 15px", border: `1px solid ${r.ok ? "rgba(34,197,94,0.18)" : "rgba(248,113,113,0.18)"}` }}>
-                      <div style={{ fontSize: 10, color: "#374151", marginBottom: 3 }}>Ch {r.ch} · {r.topic}</div>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: "#e2e8f0", marginBottom: 7 }}>{r.q}</div>
-                      <div style={{ fontSize: 12, color: r.ok ? "#86efac" : "#fca5a5" }}>{r.ok ? "✅" : "❌"} {r.chosen}</div>
-                      {!r.ok && <div style={{ fontSize: 12, color: "#86efac", marginTop: 3 }}>✓ {r.correct}</div>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+  html { scroll-behavior: smooth; }
 
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<Quiz />);
-  </script>
-</body>
-</html>
+  /* \u2500\u2500\u2500 ANIMATED BG \u2500\u2500\u2500 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(167,139,250,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(244,114,182,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* \u2500\u2500\u2500 LAYOUT \u2500\u2500\u2500 */
+  .app { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 0 0 100px; }
+
+  /* \u2500\u2500\u2500 HEADER \u2500\u2500\u2500 */
+  header {
+    padding: 52px 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
